@@ -1,6 +1,7 @@
 package com.ioet.edgeserver;
 
 import com.ioet.edgeserver.filter.CorsFilter;
+import com.ioet.edgeserver.filter.CorsRequestFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
@@ -17,5 +18,10 @@ public class EdgeServerApplication {
     @Bean
     public CorsFilter simpleFilter() {
         return new CorsFilter();
+    }
+
+    @Bean
+    public CorsRequestFilter getCorsRequestFilter() {
+        return new CorsRequestFilter();
     }
 }
