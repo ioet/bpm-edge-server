@@ -1,8 +1,5 @@
 sudo: required
 language: java
-env:
-  - APP_NAME=bpm-edge-server
-  - AWS_ECR_ACCOUNT=524819651720
 jdk:
  - oraclejdk8
 services:
@@ -18,9 +15,10 @@ after_success:
  - docker --version
  - pip install --user awscli # install aws cli w/o sudo  - export PATH=$PATH:$HOME/.local/bin # put aws in the path
  - eval $(aws ecr get-login --no-include-email --region us-east-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
- - docker build -t $APP_NAME:$TRAVIS_BUILD_ID . --build-arg JAR_FILE=build/libs/edge-server-1.0.jar
- - docker tag $APP_NAME:$TRAVIS_BUILD_ID $AWS_ECR_ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:$TRAVIS_BUILD_ID
- - docker push $AWS_ECR_ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:$TRAVIS_BUILD_ID
- - docker tag $APP_NAME:latest $AWS_ECR_ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:latest
- - docker push $AWS_ECR_ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/$APP_NAME:latest
+ - docker build -t bpm-edge-server:$TRAVIS_BUILD_ID . --build-arg JAR_FILE=build/libs/edge-server-1.0.jar
+ - docker tag bpm-edge-server:$TRAVIS_BUILD_ID 524819651720.dkr.ecr.us-east-1.amazonaws.com/bpm-edge-server:$TRAVIS_BUILD_ID
+ - docker push 524819651720.dkr.ecr.us-east-1.amazonaws.com/bpm-edge-server:$TRAVIS_BUILD_ID
+ - docker build -t bpm-edge-server . --build-arg JAR_FILE=build/libs/edge-server-1.0.jar
+ - docker tag bpm-edge-server:latest 524819651720.dkr.ecr.us-east-1.amazonaws.com/bpm-edge-server:latest
+ - docker push 524819651720.dkr.ecr.us-east-1.amazonaws.com/bpm-edge-server:latest
  
