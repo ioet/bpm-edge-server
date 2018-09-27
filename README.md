@@ -1,6 +1,6 @@
 # Edge server
 
-[![Build Status](https://travis-ci.org/ioet/edge-server.svg?branch=master)](https://travis-ci.org/ioet/edge-server)
+[![Build Status](https://travis-ci.org/ioet/bpm-edge-server.svg?branch=master)](https://travis-ci.org/ioet/bpm-edge-server)
 
 Request are handled at port: 9081
 This is an edge server, all the traffic should be done using this service. 
