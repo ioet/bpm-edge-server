@@ -12,6 +12,7 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 after_success:
+ - bash <(curl -s https://codecov.io/bash)
  - pip install --user awscli
  - eval $(aws ecr get-login --no-include-email --region us-east-1)
  - docker build -t bpm-edge-server:$TRAVIS_BUILD_ID . --build-arg JAR_FILE=build/libs/edge-server-1.0.jar
